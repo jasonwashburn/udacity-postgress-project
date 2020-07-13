@@ -6,6 +6,16 @@ from sql_queries import *
 
 
 def process_song_file(cur, filepath):
+    """Process song file for song and artists data.
+
+    INPUT:
+    cur : cursor object from psycopg2 connection to sparkifydb
+    filepath : String containing filepath to file for processing
+
+    OUTPUT:
+    Inserts song and artist data using song and artist table insert statements
+    from sql_queries.py
+    """
     # open song file
     df = pd.read_json(filepath, lines=True)
 
@@ -19,6 +29,21 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
+    """Process log file for time, user, and songplay data.
+
+    INPUT:
+    cur : cursor object from psycopg2 connection to sparkifydb
+    filepath : String containing filepath to file for processing
+
+    OUTPUT:
+    Converts timestamps from log files into useable datetime information and
+    formats time data for SQL insert to time table.
+    Extracts user information from log, drops duplicate userIds, and inserts
+    user information into users table.
+    Extracts, formats, and inserts songplay information to songplay table using
+    information in log file matched with song and artist ids from respective
+    tables using an SQL query.
+    """
     # open log file
     df = pd.read_json(filepath, lines=True)
 
@@ -31,7 +56,7 @@ def process_log_file(cur, filepath):
     # insert time data records
     time_data = [t, t.dt.hour, t.dt.day, t.dt.week, t.dt.month, t.dt.year, t.dt.weekday]
     column_labels = ('timestamp', 'hour', 'day', 'week', 'month', 'year', 'weekday')
-    #addition code I added to creat time_dict
+    # iterate through time_data and column_labels to produce dictionary
     time_dict = {}
     for i in range(0, len(column_labels)) :
         time_dict[column_labels[i]] = time_data[i]
