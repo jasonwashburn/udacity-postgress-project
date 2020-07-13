@@ -91,6 +91,20 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
+    """Process log file for time, user, and songplay data.
+
+    INPUT:
+    cur : cursor object from psycopg2 connection to sparkifydb
+    conn: connection object from psycopg2 to sparkifydb
+    filepath : String containing filepath to file for processing
+    func : function to perform on data at filepath (process_song_file or process_log_file)
+
+    OUTPUT:
+    Walks filepath to find all json files, then iterates over each file and
+    processes it as a song or log file.
+    Outputs the number of files found and then the number of files completed
+    as it processes through them.
+    """
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -110,6 +124,9 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
+    """Establishes connection to sparkify database using psycopg2 then calls 
+    data processing function on song and log files.
+    """
     conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 
