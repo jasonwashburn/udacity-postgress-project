@@ -21,7 +21,7 @@ song_table_create = ("""CREATE TABLE IF NOT EXISTS songs (song_id text PRIMARY K
                         artist_id text, year int, duration float)
 """)
 
-artist_table_create = ("""CREATE TABLE IF NOT EXISTS artists (artist_id text,
+artist_table_create = ("""CREATE TABLE IF NOT EXISTS artists (artist_id text PRIMARY KEY NOT NULL,
                         name text, location text, latitude float, longitude float)
 """)
 
@@ -49,7 +49,7 @@ song_table_insert = ("""INSERT INTO songs (song_id, title, artist_id, year,
 
 artist_table_insert = ("""INSERT INTO artists (artist_id, name, location,
                         latitude, longitude)
-                        VALUES (%s, %s, %s, %s, %s)
+                        VALUES (%s, %s, %s, %s, %s) ON CONFLICT (artist_id) DO NOTHING
 """)
 
 
