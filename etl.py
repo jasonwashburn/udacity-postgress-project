@@ -50,11 +50,14 @@ def process_log_file(cur, filepath):
     # filter by NextSong action
     df = df[df['page'] == 'NextSong']
 
+    # store original timestamp format
+    ts = df['ts']
+
     # convert timestamp column to datetime
     t = pd.to_datetime(df['ts'], unit='ms')
 
     # insert time data records
-    time_data = [t, t.dt.hour, t.dt.day, t.dt.week, t.dt.month, t.dt.year, t.dt.weekday]
+    time_data = [ts, t.dt.hour, t.dt.day, t.dt.week, t.dt.month, t.dt.year, t.dt.weekday]
     column_labels = ('timestamp', 'hour', 'day', 'week', 'month', 'year', 'weekday')
     # iterate through time_data and column_labels to produce dictionary
     time_dict = {}

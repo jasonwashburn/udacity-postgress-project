@@ -25,7 +25,7 @@ artist_table_create = ("""CREATE TABLE IF NOT EXISTS artists (artist_id text PRI
                         name text, location text, latitude float, longitude float)
 """)
 
-time_table_create = ("""CREATE TABLE IF NOT EXISTS time (start_time timestamp PRIMARY KEY NOT NULL,
+time_table_create = ("""CREATE TABLE IF NOT EXISTS time (start_time bigint PRIMARY KEY NOT NULL,
                         hour int, day int, week int, month int, year int,
                         weekday int)
 """)
