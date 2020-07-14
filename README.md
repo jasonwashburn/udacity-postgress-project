@@ -29,8 +29,8 @@ The database design schema consists of the following tables:
 
     songplays - contains a consolidated list of song play activity for analysis
         serial (serial, PRIMARY KEY)
-        start_time (datetime bigint)
-        user_id (int)
+        start_time (bigint, NOT NULL)
+        user_id (int, NOT NULL)
         level (text)
         song_id (text)
         artist_id (text)
