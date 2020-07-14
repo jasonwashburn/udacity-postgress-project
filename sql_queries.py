@@ -17,7 +17,7 @@ user_table_create = ("""CREATE TABLE IF NOT EXISTS users (user_id int PRIMARY KE
                         first_name text, last_name text, gender char, level text)
 """)
 
-song_table_create = ("""CREATE TABLE IF NOT EXISTS songs (song_id text, title text,
+song_table_create = ("""CREATE TABLE IF NOT EXISTS songs (song_id text PRIMARY KEY NOT NULL, title text,
                         artist_id text, year int, duration float)
 """)
 
@@ -44,7 +44,7 @@ user_table_insert = ("""INSERT INTO users (user_id, first_name, last_name,
 
 song_table_insert = ("""INSERT INTO songs (song_id, title, artist_id, year,
                         duration)
-                        VALUES (%s, %s, %s, %s, %s)
+                        VALUES (%s, %s, %s, %s, %s) ON CONFLICT (song_id) DO NOTHING
 """)
 
 artist_table_insert = ("""INSERT INTO artists (artist_id, name, location,
