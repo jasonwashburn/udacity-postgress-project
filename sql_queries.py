@@ -25,7 +25,7 @@ artist_table_create = ("""CREATE TABLE IF NOT EXISTS artists (artist_id text PRI
                         name text, location text, latitude float, longitude float)
 """)
 
-time_table_create = ("""CREATE TABLE IF NOT EXISTS time (start_time timestamp,
+time_table_create = ("""CREATE TABLE IF NOT EXISTS time (start_time timestamp PRIMARY KEY NOT NULL,
                         hour int, day int, week int, month int, year int,
                         weekday int)
 """)
@@ -55,7 +55,7 @@ artist_table_insert = ("""INSERT INTO artists (artist_id, name, location,
 
 time_table_insert = ("""INSERT INTO time (start_time, hour, day, week, month,
                         year, weekday)
-                        VALUES (%s, %s, %s, %s, %s, %s, %s)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s) ON CONFLICT (start_time) DO NOTHING
 """)
 
 # FIND SONGS
