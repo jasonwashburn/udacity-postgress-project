@@ -1,5 +1,6 @@
 # Project: Data Modeling with Postgres
 
+## Description ##
 The purpose of this project is to create a postgres database of song and user 
 activity for Sparkify's new music streaming app.  This will allow them to 
 analyze their data which currently resides in a directory of JSON logs and 
@@ -7,6 +8,8 @@ JSON metadata.
 
 JSON log and song data files are parsed and added to tables in a postgres 
 database to allow simple SQL queries for data analysis. 
+
+## Usage ##
 
 ### create_tables.py ###   
 This script must be run first. Connects to sparkifydb and drops any existing 
